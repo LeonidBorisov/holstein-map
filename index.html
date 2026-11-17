@@ -30,6 +30,7 @@
   --offer:#53b598; --russia:#6db478; --prussia:#7b9fdc; --label:#a9b4b1; color-scheme:dark}
 *{box-sizing:border-box}
 html,body{margin:0}
+[hidden]{display:none!important}
 body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.45}
 .wrap{max-width:1280px;margin:0 auto;padding-block:20px 28px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:14px}
 header h1{font-family:var(--f-display);font-weight:700;font-size:clamp(24px,3.2vw,36px);line-height:1.1;margin:0;text-wrap:balance}
@@ -99,6 +100,54 @@ button.primary{background:var(--ink);color:var(--bg);border-color:var(--ink);min
 @keyframes fade{from{opacity:0}to{opacity:1}}
 @media (prefers-reduced-motion: reduce){#ov{animation:none}.reg,.hatch{transition:none}}
 </style>
+<style>
+:root{--h-g:#b02639;--h-y:#2f8a73;--h-s:#2b5fa8;--h-p:#6a7891;--h-r:#2d7a3e;--h-a:#c48a1c;--h-o:#8a8f8c}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--h-g:#e2576b;--h-y:#53b598;--h-s:#6f9be0;--h-p:#93a0b8;--h-r:#6db478;--h-a:#d9a441;--h-o:#9aa29f}}
+:root[data-theme="dark"]{--h-g:#e2576b;--h-y:#53b598;--h-s:#6f9be0;--h-p:#93a0b8;--h-r:#6db478;--h-a:#d9a441;--h-o:#9aa29f}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--rule)}
+.tabs button{border:1px solid transparent;border-bottom:none;border-radius:6px 6px 0 0;background:transparent;padding:8px 16px;font-family:var(--f-display);font-size:18px;font-weight:700;color:var(--muted);margin-bottom:-1px}
+.tabs button[aria-selected="true"]{background:var(--panel);border-color:var(--rule);color:var(--ink)}
+.tabpane{display:flex;flex-direction:column;gap:14px}
+.treebox{background:var(--panel);border:1px solid var(--rule);border-radius:6px;overflow-x:auto}
+#tree{display:block}
+.tdet{background:var(--panel);border:1px solid var(--rule);border-left:6px solid var(--h-g);border-radius:6px;padding:14px 16px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:6px 22px;position:sticky;top:env(safe-area-inset-top,0px);z-index:5;box-shadow:0 6px 18px -12px rgba(0,0,0,.35)}
+@media (max-width:760px){.tdet{grid-template-columns:minmax(0,1fr)}}
+.tdet h3{font-family:var(--f-display);font-size:23px;margin:2px 0 4px;line-height:1.15}
+.tdet .hs{font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:700}
+.tdet .life{font-size:14px;color:var(--ink);font-family:var(--f-body)}
+.tdet .life b{font-family:var(--f-mono);font-weight:500}
+.tdet .rl{font-size:14px;color:var(--muted);margin-top:4px}
+.tdet ul{margin:6px 0 0;padding-left:18px;font-size:14.5px}
+.tdet .nt{font-size:15px;margin:0}
+.tleg{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--muted);align-items:center}
+.tleg span{display:inline-flex;align-items:center;gap:6px}
+.tleg i{display:inline-block;width:20px;height:10px;border-radius:2px}
+.tleg .sep{width:1px;height:16px;background:var(--rule)}
+.trow{cursor:pointer}
+.trow .hit{fill:transparent}
+.trow:hover .hit{fill:color-mix(in srgb,var(--ink) 5%,transparent)}
+.trow.main .hit{fill:color-mix(in srgb,var(--h-g) 7%,transparent)}
+.trow.sel .hit{fill:color-mix(in srgb,var(--ink) 12%,transparent)}
+.trow:focus-visible{outline:none}
+.trow:focus-visible .hit{stroke:var(--ink);stroke-width:1.5px}
+.tname{font-family:var(--f-body);font-size:13.5px;fill:var(--ink);font-weight:500}
+.trow.main .tname{font-weight:700}
+.tdates{font-family:var(--f-mono);font-size:11px;fill:var(--muted)}
+.tplace{font-size:11.5px;fill:var(--muted);font-style:italic}
+.tsp{font-size:11.5px;fill:var(--ink)}
+.tsp tspan.y{font-family:var(--f-mono);font-size:10.5px;fill:var(--h-g)}
+.rtag{font-size:9.5px;font-weight:700;fill:#fff;letter-spacing:.04em;pointer-events:none}
+.conn{fill:none;stroke:var(--muted);stroke-width:1px;opacity:.8}
+.conn.p2{stroke-dasharray:3 3}
+.cdot{fill:var(--muted)}
+.marr{stroke:var(--h-g);stroke-width:1.6px;stroke-dasharray:5 3;fill:none}
+.marrl{font-size:12px;fill:var(--h-g);font-weight:700;paint-order:stroke;stroke:var(--panel);stroke-width:3px}
+.grid line{stroke:var(--rule);stroke-width:1px}
+.grid text{font-family:var(--f-mono);font-size:11px;fill:var(--muted)}
+.cent{font-family:var(--f-display);font-size:16px;font-weight:700;fill:var(--muted)}
+.ev line{stroke:var(--gottorp);stroke-width:1px;opacity:.4;stroke-dasharray:2 3}
+.ev text{font-size:11px;fill:var(--gottorp);font-weight:700}
+</style>
 </head>
 <body>
 
@@ -106,8 +155,13 @@ button.primary{background:var(--ink);color:var(--bg);border-color:var(--ink);min
 <div class="wrap">
   <header>
     <h1>Голштинский вопрос, 1720–1762</h1>
-    <p>Что было у герцогов Голштейн-Готторпских, что у них отняли и чего добивался Петр III: от брачного договора 1724 года до переворота 28 июня 1762-го. По книге П. Щебальского «Политическая система Петра III» (1870).</p>
+    <p>Карта и родословная. Что было у герцогов Голштейн-Готторпских, что у них отняли и чего добивался Петр III: от брачного договора 1724 года до переворота 28 июня 1762-го. По книге П. Щебальского «Политическая система Петра III» (1870).</p>
   </header>
+  <nav class="tabs" role="tablist" aria-label="Разделы">
+    <button id="tab-map" role="tab" aria-selected="true">Карта</button>
+    <button id="tab-tree" role="tab" aria-selected="false">Родословная</button>
+  </nav>
+  <section class="tabpane" id="pane-map">
 
   <div class="stage">
     <div class="mapbox" id="mapbox">
@@ -151,6 +205,27 @@ button.primary{background:var(--ink);color:var(--bg);border-color:var(--ink);min
   </div>
   <div class="track" id="track" role="tablist" aria-label="Хронология"></div>
   <p class="foot">Карта схематическая. Береговая линия современная (Natural Earth), границы амтов XVIII века проведены приблизительно; готторпская доля Шлезвига была чересполосной, поэтому претензия показана на весь Шлезвиг. Страницы указаны по изданию 1870 года. Отмеченное «не из книги» добавлено из общих справочных сведений.</p>
+  </section>
+
+  <section class="tabpane" id="pane-tree" hidden>
+  <div class="tdet" id="tdet" aria-live="polite">
+    <div><div class="hs" id="tdh"></div><h3 id="tdn"></h3><div class="life" id="tdl"></div><div class="rl" id="tdr"></div></div>
+    <div><ul id="tds"></ul><p class="nt" id="tdx"></p></div>
+  </div>
+  <div class="tleg">
+    <span><i style="background:var(--h-g)"></i>Готторп, старшая линия</span>
+    <span><i style="background:var(--h-y)"></i>младшая линия (Эйтин, Ольденбург)</span>
+    <span><i style="background:var(--h-s)"></i>Готторпы на шведском троне</span>
+    <span><i style="background:var(--h-r)"></i>Гольштейн-Готторп-Романовы</span>
+    <span><i style="background:var(--h-p)"></i>шведские Пфальцы</span>
+    <span><i style="background:var(--h-a)"></i>Ангальт-Цербст</span>
+    <span class="sep"></span>
+    <span>тонкая полоса: жизнь; толстая: правление</span>
+    <span style="color:var(--h-g)">┆ ∞ брак между родственниками в древе</span>
+  </div>
+  <div class="treebox"><svg id="tree" role="img" aria-label="Родословная Голштейн-Готторпов на шкале времени 1575–1830"></svg></div>
+  <p class="foot">Каждая строка: один человек на шкале лет. Под именем указаны место рождения и браки. Линия идет от родителя к ребенку в год рождения; пунктир соединяет супругов, если оба есть в древе. Выделена линия герцогов от Иоганна Адольфа до Павла I. Нажмите на строку, чтобы прочитать подробности. Сведения взяты из общих справочных источников, не из книги Щебальского; годы даны по новому стилю, места указаны там, где они надежно известны.</p>
+</section>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
@@ -410,6 +485,161 @@ new ResizeObserver(()=>{resize();}).observe(document.getElementById('mapbox'));
 resize();go(0);view=camView(F[0].cam);applyView();
 setPlay(!reduce);
 requestAnimationFrame(loop);
+</script>
+
+<script>
+(function(){
+// h: ветвь; bp/dp: место рождения/смерти; r: [с,по,тип,подпись]; sp: [год, супруг(а)]
+const P=[
+ {id:'ja',h:'g',main:1,name:'Иоганн Адольф',b:1575,d:1616,bp:'Готторп',dp:'Готторп',r:[[1590,1616,'герцог']],sp:[[1596,'Августа Датская (1580–1639), дочь Фредерика II Датского']],
+  note:'Герцог с 1590 года. При нем готторпская линия окончательно обособилась от датского королевского дома, хотя Шлезвиг и Гольштейн по-прежнему делились с королем чересполосно.'},
+ {id:'f3',p:'ja',h:'g',main:1,name:'Фридрих III',b:1597,d:1659,bp:'Готторп',dp:'Тённинг',r:[[1616,1659,'герцог']],sp:[[1630,'Мария Елизавета Саксонская (1610–1684)']],
+  note:'Основал Фридрихштадт (1621), собрал Готторпскую библиотеку и кунсткамеру, при нем построен Готторпский глобус. В 1658 году добился суверенитета над своей частью Шлезвига. Выдал дочерей в Швецию, Ангальт, Мекленбург, Гессен и Баден.'},
+ {id:'sa',p:'f3',h:'g',name:'София Августа',b:1630,d:1680,bp:'Готторп',dp:'Косвиг',sp:[[1649,'Иоганн VI, князь Ангальт-Цербстский']],
+  note:'Прапрабабушка Екатерины II по отцовской линии.'},
+ {id:'jl',p:'sa',h:'a',name:'Иоганн Людвиг I Ангальт-Дорнбургский',b:1656,d:1704,bp:'Цербст',dp:'Дорнбург',
+  note:'Сын Софии Августы, основатель Дорнбургской линии Ангальт-Цербстского дома.'},
+ {id:'cak',p:'jl',h:'a',name:'Кристиан Август Ангальт-Цербстский',b:1690,d:1747,bp:'Дорнбург',dp:'Цербст',r:[[1742,1747,'князь']],sp:[[1727,'Иоганна Елизавета Голштейн-Готторпская']],m:{to:'je',y:1727},
+  note:'Прусский генерал, комендант и губернатор Штеттина. Отец Екатерины II. Его брак с Иоганной Елизаветой соединил две готторпские линии: Екатерина происходит от Готторпов и по отцу, и по матери.'},
+ {id:'odf',p:'f3',h:'g',grp:1,name:'Другие дочери Фридриха III',b:1631,d:1719,bp:'Готторп',
+  note:'Магдалена Сибилла (1631–1719), за Густавом Адольфом Мекленбург-Гюстровским; Мария Елизавета (1634–1665), за Людвигом VI Гессен-Дармштадтским; Анна Доротея (1640–1713).'},
+ {id:'he',p:'f3',h:'g',name:'Гедвига Элеонора',b:1636,d:1715,bp:'Готторп',dp:'Стокгольм',r:[[1654,1660,'королева']],sp:[[1654,'Карл X Густав, король Швеции']],
+  note:'Королева Швеции, затем регентша при малолетнем сыне Карле XI. Главный узел шведско-готторпского союза против Дании, продержавшегося до Северной войны.'},
+ {id:'k11',p:'he',h:'p',name:'Карл XI',b:1655,d:1697,bp:'Стокгольм',dp:'Стокгольм',r:[[1660,1697,'король Швеции']],sp:[[1680,'Ульрика Элеонора Датская']],
+  note:'Сын Гедвиги Элеоноры, двоюродный брат и защитник герцога Кристиана Альбрехта.'},
+ {id:'hs',p:'k11',h:'p',name:'Гедвига София',b:1681,d:1708,bp:'Стокгольм',dp:'Стокгольм',sp:[[1698,'Фридрих IV Голштейн-Готторпский']],m:{to:'f4',y:1698},
+  note:'Старшая сестра Карла XII, мать Карла Фридриха. Из-за этого брака голштинский наследник стал ближайшим претендентом на шведский престол.'},
+ {id:'k12',p:'k11',h:'p',name:'Карл XII',b:1682,d:1718,bp:'Стокгольм',dp:'Фредрикстен (Норвегия)',r:[[1697,1718,'король Швеции']],sp:[[0,'не был женат']],
+  note:'Шурин и союзник Фридриха IV. Пока он был жив, Готторпы надеялись вернуть Шлезвиг шведским оружием. Убит при осаде Фредрикстена.'},
+ {id:'ue',p:'k11',h:'p',name:'Ульрика Элеонора',b:1688,d:1741,bp:'Стокгольм',dp:'Стокгольм',r:[[1718,1720,'кор.']],sp:[[1715,'Фредрик I Гессен-Кассельский']],
+  note:'Обошла племянника Карла Фридриха и передала корону мужу. По миру 1720 года Швеция признала Шлезвиг за Данией.'},
+ {id:'ca',p:'f3',h:'g',main:1,name:'Кристиан Альбрехт',b:1641,d:1695,bp:'Готторп',dp:'Готторп',r:[[1655,1659,'еп.'],[1659,1695,'герцог']],sp:[[1667,'Фредерика Амалия Датская (1649–1704), дочь Фредерика III Датского']],
+  note:'Основал Кильский университет (1665). Дважды изгнан датчанами (1675–1679 и 1684–1689), оба раза восстановлен при поддержке Швеции; Альтонский договор 1689 года вернул ему права в Шлезвиге.'},
+ {id:'cad',p:'ca',h:'g',grp:1,name:'Дочери Кристиана Альбрехта',b:1670,d:1755,bp:'Готторп',
+  note:'София Амалия (1670–1710), за Августом Вильгельмом Брауншвейг-Вольфенбюттельским; Мария Елизавета (1678–1755), аббатиса Кведлинбургская.'},
+ {id:'f4',p:'ca',h:'g',main:1,name:'Фридрих IV',b:1671,d:1702,bp:'Готторп',dp:'Клишов (Польша)',r:[[1695,1702,'герцог']],sp:[[1698,'Гедвига София Шведская']],
+  note:'Союзник шурина Карла XII в Северной войне, убит в битве при Клишове. Оставил двухлетнего сына.'},
+ {id:'kf',p:'f4',h:'g',main:1,name:'Карл Фридрих',b:1700,d:1739,bp:'Стокгольм',dp:'Рольфсхаген',r:[[1702,1718,'опека'],[1718,1739,'герцог']],sp:[[1725,'Анна Петровна (1708–1728), дочь Петра I; род. в Москве, ум. в Киле']],
+  note:'Потерял Шлезвиг в 1713 году и шведскую корону в 1718-м. Сделал ставку на Россию: брачный договор 1724 года, место в Верховном тайном совете при Екатерине I. После победы Меншикова уехал в Киль и до смерти отказывался менять права на Шлезвиг на деньги.'},
+ {id:'p3',p:'kf',h:'r',main:1,name:'Петр III (Карл Петер Ульрих)',b:1728,d:1762,bp:'Киль',dp:'Ропша',r:[[1739,1762,'герцог'],[1762,1762.6,'']],sp:[[1745,'Екатерина Алексеевна (Екатерина II), троюродная сестра']],m:{to:'cat',y:1745},
+  note:'Герцог Голштинский с 1739 года (до 1745 при регенте Адольфе Фридрихе), с 1742 года наследник российского престола, с декабря 1761 года император. Отказывался от любого обмена Гольштейна и в 1762 году готовил войну с Данией за Шлезвиг. Свергнут 28 июня 1762 года.'},
+ {id:'paul',p:'p3',p2:'cat',h:'r',main:1,name:'Павел I',b:1754,d:1801,bp:'Санкт-Петербург',dp:'Санкт-Петербург, Михайловский замок',r:[[1762,1773,'герцог'],[1796,1801,'имп.']],sp:[[1773,'Наталья Алексеевна (Вильгельмина Гессен-Дармштадтская), ум. 1776'],[1776,'Мария Федоровна (София Доротея Вюртембергская)']],
+  note:'Герцог Голштинский с 1762 года при регентстве матери. В 1773 году по Царскосельскому трактату уступил готторпский Гольштейн Дании в обмен на Ольденбург и Дельменгорст и передал их младшей линии. Так закончился голштинский вопрос.'},
+ {id:'a1',p:'paul',h:'r',name:'Александр I',b:1777,d:1825,bp:'Санкт-Петербург',dp:'Таганрог',r:[[1801,1825,'император']],sp:[[1793,'Елизавета Алексеевна (Луиза Баденская)']],
+  note:'Император с 1801 года. Его жена была родной сестрой шведской королевы Фредерики, жены Густава IV Адольфа.'},
+ {id:'kon',p:'paul',h:'r',name:'Константин',b:1779,d:1831,bp:'Царское Село',dp:'Витебск',sp:[[1796,'Анна Федоровна (Юлиана Саксен-Кобургская), развод 1820'],[1820,'Иоанна Грудзинская, княгиня Лович']],
+  note:'Цесаревич, наместник Царства Польского; в 1823–1825 годах отказался от престола.'},
+ {id:'alx',p:'paul',h:'r',name:'Александра Павловна',b:1783,d:1801,bp:'Царское Село',dp:'Офен (Буда)',sp:[[1799,'эрцгерцог Иосиф, палатин Венгрии']],note:'Умерла в Венгрии через полтора года после свадьбы.'},
+ {id:'ele',p:'paul',h:'r',name:'Елена Павловна',b:1784,d:1803,bp:'Санкт-Петербург',dp:'Людвигслуст',sp:[[1799,'Фридрих Людвиг, наследный принц Мекленбург-Шверинский']],note:'Мекленбургская ветвь: ее потомки правили Мекленбург-Шверином.'},
+ {id:'mar',p:'paul',h:'r',name:'Мария Павловна',b:1786,d:1859,bp:'Санкт-Петербург',dp:'Веймар',sp:[[1804,'Карл Фридрих, великий герцог Саксен-Веймарский']],note:'Великая герцогиня Саксен-Веймарская, покровительница Веймара эпохи Гёте.'},
+ {id:'ekt',p:'paul',h:'r',name:'Екатерина Павловна',b:1788,d:1819,bp:'Царское Село',dp:'Штутгарт',r:[[1816,1819,'кор.']],sp:[[1809,'Георг Ольденбургский, троюродный брат из младшей готторпской линии'],[1816,'Вильгельм I, король Вюртемберга']],m:{to:'geo',y:1809},
+  note:'Первым браком вышла за принца Георга Ольденбургского: обе разошедшиеся в XVIII веке готторпские линии снова соединились. Затем королева Вюртемберга.'},
+ {id:'olg',p:'paul',h:'r',name:'Ольга Павловна',b:1792,d:1795,bp:'Санкт-Петербург',dp:'Санкт-Петербург',note:'Умерла в детстве.'},
+ {id:'ann',p:'paul',h:'r',name:'Анна Павловна',b:1795,d:1865,bp:'Санкт-Петербург',dp:'Гаага',r:[[1840,1849,'королева']],sp:[[1816,'Виллем II, король Нидерландов']],note:'Королева Нидерландов с 1840 года.'},
+ {id:'n1',p:'paul',h:'r',name:'Николай I',b:1796,d:1855,bp:'Царское Село',dp:'Санкт-Петербург',r:[[1825,1855,'император']],sp:[[1817,'Александра Федоровна (Шарлотта Прусская)']],note:'Император с 1825 года.'},
+ {id:'a2',p:'n1',h:'r',name:'Александр II',b:1818,d:1881,bp:'Москва, Кремль',dp:'Санкт-Петербург',r:[[1855,1881,'император']],sp:[[1841,'Мария Александровна (Мария Гессенская)']],note:'Старший сын Николая I, первый ребенок нового поколения Гольштейн-Готторп-Романовых.'},
+ {id:'mi',p:'paul',h:'r',name:'Михаил Павлович',b:1798,d:1849,bp:'Санкт-Петербург',dp:'Варшава',sp:[[1824,'Елена Павловна (Шарлотта Вюртембергская)']],note:'Великий князь, генерал-фельдцейхмейстер.'},
+ {id:'ap',p:'p3',p2:'cat',h:'r',name:'Анна Петровна',b:1757,d:1759,bp:'Санкт-Петербург',dp:'Санкт-Петербург',note:'Дочь Екатерины, умерла во младенчестве.'},
+ {id:'cau',p:'ca',h:'y',name:'Кристиан Август',b:1673,d:1726,bp:'Готторп',dp:'Эйтин',r:[[1702,1718,'админ.'],[1705,1726,'князь-епископ']],sp:[[1704,'Альбертина Фридерика Баден-Дурлахская, двоюродная сестра']],m:{to:'alb',y:1704},
+  note:'Князь-епископ Любекский и администратор герцогства при малолетнем Карле Фридрихе. В 1713 году впустил шведов Стенбока в Тённинг, что дало Дании повод захватить Шлезвиг. Родоначальник младшей линии: от него идут шведские короли и герцоги Ольденбургские.'},
+ {id:'ka',p:'cau',h:'y',name:'Карл Август',b:1706,d:1727,dp:'Санкт-Петербург',sp:[[0,'жених цесаревны Елизаветы Петровны']],
+  note:'Приехал в Петербург свататься к Елизавете и умер от оспы, не дожив до свадьбы.'},
+ {id:'adf',p:'cau',h:'s',name:'Адольф Фридрих',b:1710,d:1771,bp:'Готторп',dp:'Стокгольм',r:[[1727,1750,'еп.'],[1739,1745,'регент'],[1751,1771,'король Швеции']],sp:[[1744,'Луиза Ульрика Прусская, сестра Фридриха II']],
+  note:'Регент Гольштейна при малолетнем Петре, князь-епископ Любекский, с 1751 года король Швеции, избранный при поддержке Елизаветы по Абоскому миру. В 1762 году отказался помогать племяннику против Дании.'},
+ {id:'g3',p:'adf',h:'s',name:'Густав III',b:1746,d:1792,bp:'Стокгольм',dp:'Стокгольм',r:[[1771,1792,'король']],sp:[[1766,'София Магдалена Датская']],note:'Совершил переворот 1772 года, воевал с Россией в 1788–1790 годах, убит на маскараде.'},
+ {id:'g4',p:'g3',h:'s',name:'Густав IV Адольф',b:1778,d:1837,bp:'Стокгольм',dp:'Санкт-Галлен',r:[[1792,1809,'король']],sp:[[1797,'Фредерика Баденская, сестра императрицы Елизаветы Алексеевны']],note:'При нем Швеция потеряла Финляндию; свергнут в 1809 году и уехал в изгнание.'},
+ {id:'gv',p:'g4',h:'s',name:'Густав, принц Ваза',b:1799,d:1877,bp:'Стокгольм',dp:'Пильниц',sp:[[1830,'Луиза Баденская']],note:'Наследник, лишенный прав после свержения отца; австрийский генерал.'},
+ {id:'k13',p:'adf',h:'s',name:'Карл XIII',b:1748,d:1818,bp:'Стокгольм',dp:'Стокгольм',r:[[1809,1818,'король']],sp:[[1774,'Гедвига Елизавета Шарлотта Голштейн-Готторпская, двоюродная сестра']],m:{to:'hec',y:1774},
+  note:'Последний Готторп на шведском троне. Бездетным усыновил маршала Бернадота, будущего Карла XIV Юхана.'},
+ {id:'adg',p:'adf',h:'s',grp:1,name:'Фредрик Адольф и София Альбертина',b:1750,d:1829,bp:'Стокгольм',note:'Фредрик Адольф (1750–1803), герцог Эстергётландский; София Альбертина (1753–1829), аббатиса Кведлинбургская.'},
+ {id:'fra',p:'cau',h:'y',name:'Фридрих Август',b:1711,d:1785,bp:'Готторп',dp:'Ольденбург',r:[[1750,1785,'еп.'],[1773,1785,'герц. Ольденб.']],sp:[[1752,'Ульрика Фридерика Вильгельмина Гессен-Кассельская']],
+  note:'Князь-епископ Любекский, в 1773 году получил от Павла Ольденбург и Дельменгорст, с 1774 года герцог Ольденбургский.'},
+ {id:'pfw',p:'fra',h:'y',name:'Петр Фридрих Вильгельм',b:1754,d:1823,bp:'Эйтин',dp:'Плён',r:[[1785,1823,'герцог (номин.)']],note:'Из-за душевной болезни правление вел двоюродный брат Петр Фридрих Людвиг.'},
+ {id:'hec',p:'fra',h:'y',name:'Гедвига Елизавета Шарлотта',b:1759,d:1818,bp:'Эйтин',dp:'Стокгольм',r:[[1809,1818,'кор.']],sp:[[1774,'Карл XIII, король Швеции, двоюродный брат']],note:'Королева Швеции и Норвегии, автор знаменитых дневников о шведском дворе.'},
+ {id:'je',p:'cau',h:'y',name:'Иоганна Елизавета',b:1712,d:1760,bp:'Готторп',dp:'Париж',sp:[[1727,'Кристиан Август Ангальт-Цербстский']],
+  note:'Сестра шведского короля Адольфа Фридриха и мать Екатерины II. В 1744 году привезла дочь в Россию.'},
+ {id:'cat',p:'je',p2:'cak',h:'a',name:'Екатерина II (София Августа Фредерика)',b:1729,d:1796,bp:'Штеттин',dp:'Санкт-Петербург',r:[[1762,1796,'императрица']],sp:[[1745,'Петр Федорович (Петр III), троюродный брат']],
+  note:'Принцесса Ангальт-Цербстская, по матери Готторп. Свергла мужа 28 июня 1762 года, отозвала армию Румянцева и в 1773 году довела до конца обмен Гольштейна на Ольденбург.'},
+ {id:'gl',p:'cau',h:'y',name:'Георг Людвиг',b:1719,d:1763,bp:'Готторп',dp:'Киль',sp:[[1750,'София Шарлотта Гольштейн-Бекская']],
+  note:'Прусский генерал, дядя Петра III. В 1762 году генерал-фельдмаршал и наместник Гольштейна; по секретному артикулу с Пруссией должен был стать герцогом Курляндским.'},
+ {id:'pfl',p:'gl',h:'y',name:'Петр Фридрих Людвиг',b:1755,d:1829,bp:'Ризенбург (Пруссия)',dp:'Висбаден',r:[[1785,1823,'регент'],[1823,1829,'герцог']],sp:[[1781,'Фридерика Вюртембергская, сестра императрицы Марии Федоровны']],
+  note:'Воспитывался при Екатерине II; правил Ольденбургом за больного кузена, затем сам герцог.'},
+ {id:'pfa',p:'pfl',h:'y',name:'Пауль Фридрих Август',b:1783,d:1853,bp:'Растеде',dp:'Ольденбург',r:[[1829,1853,'великий герцог']],sp:[[1817,'Аделаида Ангальт-Бернбург-Шаумбургская']],note:'Первый великий герцог Ольденбургский.'},
+ {id:'geo',p:'pfl',h:'y',name:'Георг Ольденбургский',b:1784,d:1812,bp:'Растеде',dp:'Тверь',sp:[[1809,'Екатерина Павловна, троюродная сестра']],note:'Генерал-губернатор в Твери; умер от тифа во время войны 1812 года.'},
+ {id:'af',p:'f3',h:'g',name:'Август Фридрих',b:1646,d:1705,bp:'Готторп',dp:'Эйтин',r:[[1666,1705,'князь-епископ']],note:'Князь-епископ Любекский; Эйтин стал постоянной резиденцией младших Готторпов.'},
+ {id:'am',p:'f3',h:'g',name:'Августа Мария',b:1649,d:1728,bp:'Готторп',dp:'Карлсбург (Дурлах)',sp:[[1670,'Фридрих VII Магнус, маркграф Баден-Дурлахский']],note:'Мать Альбертины Фридерики, будущей жены своего племянника Кристиана Августа.'},
+ {id:'alb',p:'am',h:'o',name:'Альбертина Фридерика Баден-Дурлахская',b:1682,d:1755,dp:'Гамбург',sp:[[1704,'Кристиан Август Голштейн-Готторпский']],note:'Мать шведского короля Адольфа Фридриха и бабушка Екатерины II.'},
+ {id:'jo',p:'ja',h:'g',name:'Иоганн',b:1606,d:1655,dp:'Эйтин',r:[[1634,1655,'князь-епископ']],note:'Младший сын Иоганна Адольфа, первый из Готторпов на Любекской епископской кафедре.'},
+];
+const HN={g:'Голштейн-Готторп, старшая линия',y:'Голштейн-Готторп, младшая линия',s:'Голштейн-Готторп, шведская королевская ветвь',r:'Гольштейн-Готторп-Романовы',p:'Шведский королевский дом (Пфальц-Цвейбрюккен)',a:'Ангальт-Цербст',o:'Баден-Дурлах'};
+const byId=Object.fromEntries(P.map(p=>[p.id,p]));
+const kids={};P.forEach(p=>{if(p.p)(kids[p.p]=kids[p.p]||[]).push(p);});
+Object.values(kids).forEach(a=>a.sort((x,y)=>x.b-y.b));
+const rows=[];(function dfs(p){rows.push(p);(kids[p.id]||[]).forEach(dfs);})(byId.ja);
+rows.forEach((p,i)=>p.i=i);
+const EV=[[1713,'Дания занимает Шлезвиг'],[1724,'брачный договор'],[1762,'Петр III'],[1773,'обмен Гольштейна']];
+const svg=d3.select('#tree');
+const RH=50,TOP=66,Y0=1570,Y1=1832;
+let sel='p3';
+const hv=h=>`var(--h-${h})`;
+function show(id){sel=id;const p=byId[id];
+  document.getElementById('tdet').style.borderLeftColor=hv(p.h);
+  const hs=document.getElementById('tdh');hs.textContent=HN[p.h];hs.style.color=hv(p.h);
+  document.getElementById('tdn').textContent=p.name;
+  document.getElementById('tdl').innerHTML='';const L=document.getElementById('tdl');
+  const add=(sym,y,pl)=>{const s=document.createElement('span');s.innerHTML=`${sym} <b></b>`;s.querySelector('b').textContent=y;if(pl)s.append(', '+pl);L.append(s);};
+  add('род.',p.b,p.bp);L.append(document.createTextNode('   ·   '));add('ум.',p.d,p.dp);
+  document.getElementById('tdr').textContent=(p.r||[]).filter(r=>r[2]).map(([a,b,t])=>`${t}: ${Math.floor(a)}–${Math.floor(b)}`).join('; ');
+  const ul=document.getElementById('tds');ul.innerHTML='';(p.sp||[]).forEach(([y,t])=>{const li=document.createElement('li');li.textContent=(y?`∞ ${y}: `:'')+t;ul.append(li);});
+  document.getElementById('tdx').textContent=p.note||'';
+  svg.selectAll('.trow').classed('sel',d=>d.id===id);}
+function draw(){
+  const box=document.querySelector('.treebox');const W=Math.max(1080,box.clientWidth);const H=TOP+rows.length*RH+20;
+  svg.attr('width',W).attr('height',H).attr('viewBox',`0 0 ${W} ${H}`);svg.selectAll('*').remove();
+  const x=d3.scaleLinear([Y0,Y1],[14,W-14]);const y=i=>TOP+i*RH+24;
+  const g=svg.append('g').attr('class','grid');
+  [[1600,'XVII век'],[1700,'XVIII век'],[1800,'XIX век']].forEach(([yr,t],k)=>{g.append('rect').attr('x',x(yr)).attr('y',0).attr('width',x(Math.min(yr+100,Y1))-x(yr)).attr('height',H).style('fill',k===1?'color-mix(in srgb,var(--ink) 3.5%,transparent)':'transparent');
+    g.append('text').attr('class','cent').attr('x',x(yr)+6).attr('y',19).text(t);});
+  d3.range(1575,1831,25).forEach(yr=>{g.append('line').attr('x1',x(yr)).attr('x2',x(yr)).attr('y1',27).attr('y2',H);g.append('text').attr('x',x(yr)+3).attr('y',37).text(yr);});
+  const ev=svg.append('g').attr('class','ev');
+  EV.forEach(([yr,t],k)=>{ev.append('line').attr('x1',x(yr)).attr('x2',x(yr)).attr('y1',42).attr('y2',H);ev.append('text').attr('x',x(yr)+3).attr('y',k%2?62:52).text(t);});
+  const cg=svg.append('g');
+  const rg=svg.append('g');
+  const row=rg.selectAll('g').data(rows).join('g').attr('class',d=>'trow'+(d.main?' main':'')).attr('tabindex',0).attr('role','button').attr('aria-label',d=>`${d.name}, ${d.b}–${d.d}`)
+    .on('click',(e,d)=>show(d.id)).on('keydown',(e,d)=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();show(d.id);}});
+  row.append('rect').attr('class','hit').attr('x',0).attr('y',d=>y(d.i)-26).attr('width',W).attr('height',RH);
+  row.each(function(d){const r=d3.select(this);const yy=y(d.i);const col=hv(d.h);const xe=x(Math.min(d.d,Y1));
+    r.append('rect').attr('x',x(d.b)).attr('y',yy-2.5).attr('width',Math.max(3,xe-x(d.b))).attr('height',5).attr('rx',2.5).style('fill',col).style('opacity',d.grp?.35:.45);
+    if(d.d>Y1)r.append('path').attr('d',`M${xe-1},${yy-5} l6,5 l-6,5z`).style('fill',col);
+    (d.r||[]).forEach(([a,b,t])=>{const w=Math.max(4,x(Math.min(b,Y1))-x(a));r.append('rect').attr('x',x(a)).attr('y',yy-7).attr('width',w).attr('height',14).attr('rx',3).style('fill',col);
+      if(t&&w>t.length*5.6+6)r.append('text').attr('class','rtag').attr('x',x(a)+4).attr('y',yy+3.5).text(t);});
+    const text=d.name+'  '+d.b+'–'+d.d+(d.bp?'   род. '+d.bp:'');const nameW=text.length*6.4;
+    const right=x(d.b)+nameW>W-10;const tx=right?W-12:x(d.b);const an=right?'end':'start';
+    const t=r.append('text').attr('y',yy-11).attr('x',tx).attr('text-anchor',an);
+    t.append('tspan').attr('class','tname').text(d.name+'  ');t.append('tspan').attr('class','tdates').text(`${d.b}–${d.d}`);
+    if(d.bp)t.append('tspan').attr('class','tplace').text(`   род. ${d.bp}`);
+    if(d.sp&&d.sp.length){const s=r.append('text').attr('class','tsp').attr('y',yy+19).attr('x',tx).attr('text-anchor',an);
+      d.sp.forEach(([yr,who],k)=>{if(k)s.append('tspan').text('   ');if(yr)s.append('tspan').attr('class','y').text('∞ '+yr+' ');else s.append('tspan').attr('class','y').text('∞ ');s.append('tspan').text(who.split(',')[0].split(' (')[0].replace(/^(.{0,48}).*$/,'$1'));});}
+    r.append('title').text(`${d.name}, ${d.b}–${d.d}`);});
+  rows.forEach(d=>{[['p',''],['p2',' p2']].forEach(([k,c])=>{if(!d[k])return;const pa=byId[d[k]];const xx=x(d.b);
+    cg.append('path').attr('class','conn'+c).attr('d',`M${xx},${y(pa.i)+3} L${xx},${y(d.i)-3}`);
+    cg.append('circle').attr('class','cdot').attr('cx',xx).attr('cy',y(pa.i)).attr('r',2.2);});});
+  rows.forEach(d=>{if(!d.m)return;const o=byId[d.m.to];const xx=x(d.m.y);
+    cg.append('path').attr('class','marr').attr('d',`M${xx},${y(d.i)} L${xx},${y(o.i)}`);
+    rg.append('text').attr('class','marrl').attr('x',xx+4).attr('y',(y(d.i)+y(o.i))/2).text('∞ '+d.m.y);});
+  show(sel);
+}
+new ResizeObserver(()=>{if(!document.getElementById('pane-tree').hidden)draw();}).observe(document.querySelector('.treebox'));
+function setTab(t){const tree=t==='tree';
+  document.getElementById('pane-map').hidden=tree;document.getElementById('pane-tree').hidden=!tree;
+  document.getElementById('tab-map').setAttribute('aria-selected',!tree);document.getElementById('tab-tree').setAttribute('aria-selected',tree);
+  if(tree){if(typeof setPlay==='function')setPlay(false);requestAnimationFrame(draw);}
+}
+document.getElementById('tab-map').onclick=()=>{location.hash='map';};
+document.getElementById('tab-tree').onclick=()=>{location.hash='tree';};
+window.addEventListener('hashchange',()=>setTab(location.hash==='#tree'?'tree':'map'));
+setTab(location.hash==='#tree'?'tree':'map');
+})();
 </script>
 
 </body>
