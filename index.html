@@ -107,46 +107,45 @@ button.primary{background:var(--ink);color:var(--bg);border-color:var(--ink);min
 .tabs{display:flex;gap:4px;border-bottom:1px solid var(--rule)}
 .tabs button{border:1px solid transparent;border-bottom:none;border-radius:6px 6px 0 0;background:transparent;padding:8px 16px;font-family:var(--f-display);font-size:18px;font-weight:700;color:var(--muted);margin-bottom:-1px}
 .tabs button[aria-selected="true"]{background:var(--panel);border-color:var(--rule);color:var(--ink)}
-.tabpane{display:flex;flex-direction:column;gap:14px}
-.treebox{background:var(--panel);border:1px solid var(--rule);border-radius:6px;overflow-x:auto}
-#tree{display:block}
-.tdet{background:var(--panel);border:1px solid var(--rule);border-left:6px solid var(--h-g);border-radius:6px;padding:14px 16px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:6px 22px;position:sticky;top:env(safe-area-inset-top,0px);z-index:5;box-shadow:0 6px 18px -12px rgba(0,0,0,.35)}
+.tabpane{display:flex;flex-direction:column;gap:12px}
+.tdet{background:var(--panel);border:1px solid var(--rule);border-left:6px solid var(--h-g);border-radius:6px;padding:12px 16px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:6px 22px}
 @media (max-width:760px){.tdet{grid-template-columns:minmax(0,1fr)}}
-.tdet h3{font-family:var(--f-display);font-size:23px;margin:2px 0 4px;line-height:1.15}
+.tdet h3{font-family:var(--f-display);font-size:22px;margin:2px 0 4px;line-height:1.15}
 .tdet .hs{font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:700}
-.tdet .life{font-size:14px;color:var(--ink);font-family:var(--f-body)}
+.tdet .life{font-size:14px}
 .tdet .life b{font-family:var(--f-mono);font-weight:500}
 .tdet .rl{font-size:14px;color:var(--muted);margin-top:4px}
-.tdet ul{margin:6px 0 0;padding-left:18px;font-size:14.5px}
+.tdet ul{margin:0 0 6px;padding-left:18px;font-size:14.5px}
 .tdet .nt{font-size:15px;margin:0}
-.tleg{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--muted);align-items:center}
+.tbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.tbar .hint{font-size:13px;color:var(--muted);margin-left:4px}
+.tleg{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--muted);align-items:center}
 .tleg span{display:inline-flex;align-items:center;gap:6px}
-.tleg i{display:inline-block;width:20px;height:10px;border-radius:2px}
-.tleg .sep{width:1px;height:16px;background:var(--rule)}
-.trow{cursor:pointer}
-.trow .hit{fill:transparent}
-.trow:hover .hit{fill:color-mix(in srgb,var(--ink) 5%,transparent)}
-.trow.main .hit{fill:color-mix(in srgb,var(--h-g) 7%,transparent)}
-.trow.sel .hit{fill:color-mix(in srgb,var(--ink) 12%,transparent)}
-.trow:focus-visible{outline:none}
-.trow:focus-visible .hit{stroke:var(--ink);stroke-width:1.5px}
-.tname{font-family:var(--f-body);font-size:13.5px;fill:var(--ink);font-weight:500}
-.trow.main .tname{font-weight:700}
-.tdates{font-family:var(--f-mono);font-size:11px;fill:var(--muted)}
-.tplace{font-size:11.5px;fill:var(--muted);font-style:italic}
-.tsp{font-size:11.5px;fill:var(--ink)}
-.tsp tspan.y{font-family:var(--f-mono);font-size:10.5px;fill:var(--h-g)}
-.rtag{font-size:9.5px;font-weight:700;fill:#fff;letter-spacing:.04em;pointer-events:none}
-.conn{fill:none;stroke:var(--muted);stroke-width:1px;opacity:.8}
-.conn.p2{stroke-dasharray:3 3}
-.cdot{fill:var(--muted)}
-.marr{stroke:var(--h-g);stroke-width:1.6px;stroke-dasharray:5 3;fill:none}
-.marrl{font-size:12px;fill:var(--h-g);font-weight:700;paint-order:stroke;stroke:var(--panel);stroke-width:3px}
-.grid line{stroke:var(--rule);stroke-width:1px}
-.grid text{font-family:var(--f-mono);font-size:11px;fill:var(--muted)}
-.cent{font-family:var(--f-display);font-size:16px;font-weight:700;fill:var(--muted)}
-.ev line{stroke:var(--gottorp);stroke-width:1px;opacity:.4;stroke-dasharray:2 3}
-.ev text{font-size:11px;fill:var(--gottorp);font-weight:700}
+.tleg i{display:inline-block;width:18px;height:12px;border-radius:3px;border:2px solid}
+.treeview{position:relative;height:clamp(480px,72vh,860px);background:var(--panel);border:1px solid var(--rule);border-radius:6px;overflow:hidden;touch-action:none;cursor:grab}
+.treeview:active{cursor:grabbing}
+#tree{display:block;width:100%;height:100%}
+.card{cursor:pointer}
+.card .bx{stroke-width:1.5px}
+.card.main .bx{stroke-width:3px}
+.card.sel .bx{stroke:var(--ink)!important;stroke-width:3.5px}
+.card .nm{font-family:var(--f-body);font-size:14px;font-weight:700;fill:var(--ink)}
+.card .yr{font-family:var(--f-mono);font-size:11.5px;fill:var(--ink)}
+.card .pl{font-size:11.5px;fill:var(--muted);font-style:italic}
+.card .ro{font-size:11.5px;font-weight:700}
+.card:focus-visible{outline:none}
+.card:focus-visible .bx{stroke:var(--ink);stroke-width:3px}
+.chip .bx{fill:var(--bg);stroke:var(--rule);stroke-width:1.2px;stroke-dasharray:4 3}
+.chip .nm{font-size:12.5px;font-weight:500;fill:var(--ink)}
+.chip .yr{font-family:var(--f-mono);font-size:11px;fill:var(--muted)}
+.chip .lb{font-size:10.5px;fill:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.kid{fill:none;stroke:var(--muted);stroke-width:1.4px}
+.mline{stroke:var(--h-g);stroke-width:2px}
+.mlab{font-family:var(--f-mono);font-size:12px;fill:var(--h-g);font-weight:500;paint-order:stroke;stroke:var(--panel);stroke-width:4px}
+.xlink{fill:none;stroke-width:2px;stroke-dasharray:6 4;opacity:.85}
+.xlab{font-size:11.5px;font-style:italic;paint-order:stroke;stroke:var(--panel);stroke-width:4px}
+.gen{font-family:var(--f-display);font-size:15px;font-weight:700;fill:var(--muted);opacity:.7}
+.genline{stroke:var(--rule);stroke-width:1px;stroke-dasharray:2 6}
 </style>
 </head>
 <body>
@@ -155,11 +154,11 @@ button.primary{background:var(--ink);color:var(--bg);border-color:var(--ink);min
 <div class="wrap">
   <header>
     <h1>Голштинский вопрос, 1720–1762</h1>
-    <p>Карта и родословная. Что было у герцогов Голштейн-Готторпских, что у них отняли и чего добивался Петр III: от брачного договора 1724 года до переворота 28 июня 1762-го. По книге П. Щебальского «Политическая система Петра III» (1870).</p>
+    <p>Карта и родословное древо. Что было у герцогов Голштейн-Готторпских, что у них отняли и чего добивался Петр III: от брачного договора 1724 года до переворота 28 июня 1762-го. По книге П. Щебальского «Политическая система Петра III» (1870).</p>
   </header>
   <nav class="tabs" role="tablist" aria-label="Разделы">
     <button id="tab-map" role="tab" aria-selected="true">Карта</button>
-    <button id="tab-tree" role="tab" aria-selected="false">Родословная</button>
+    <button id="tab-tree" role="tab" aria-selected="false">Родословное древо</button>
   </nav>
   <section class="tabpane" id="pane-map">
 
@@ -212,19 +211,26 @@ button.primary{background:var(--ink);color:var(--bg);border-color:var(--ink);min
     <div><div class="hs" id="tdh"></div><h3 id="tdn"></h3><div class="life" id="tdl"></div><div class="rl" id="tdr"></div></div>
     <div><ul id="tds"></ul><p class="nt" id="tdx"></p></div>
   </div>
-  <div class="tleg">
-    <span><i style="background:var(--h-g)"></i>Готторп, старшая линия</span>
-    <span><i style="background:var(--h-y)"></i>младшая линия (Эйтин, Ольденбург)</span>
-    <span><i style="background:var(--h-s)"></i>Готторпы на шведском троне</span>
-    <span><i style="background:var(--h-r)"></i>Гольштейн-Готторп-Романовы</span>
-    <span><i style="background:var(--h-p)"></i>шведские Пфальцы</span>
-    <span><i style="background:var(--h-a)"></i>Ангальт-Цербст</span>
-    <span class="sep"></span>
-    <span>тонкая полоса: жизнь; толстая: правление</span>
-    <span style="color:var(--h-g)">┆ ∞ брак между родственниками в древе</span>
+  <div class="tbar">
+    <button id="tz-in" aria-label="Приблизить">+</button>
+    <button id="tz-out" aria-label="Отдалить">−</button>
+    <button id="tz-all">Весь род</button>
+    <button id="tz-p3">К Петру III</button>
+    <span class="hint">Тяните мышью или пальцем, масштаб колесом или щипком. Нажмите на карточку, чтобы прочитать о человеке.</span>
   </div>
-  <div class="treebox"><svg id="tree" role="img" aria-label="Родословная Голштейн-Готторпов на шкале времени 1575–1830"></svg></div>
-  <p class="foot">Каждая строка: один человек на шкале лет. Под именем указаны место рождения и браки. Линия идет от родителя к ребенку в год рождения; пунктир соединяет супругов, если оба есть в древе. Выделена линия герцогов от Иоганна Адольфа до Павла I. Нажмите на строку, чтобы прочитать подробности. Сведения взяты из общих справочных источников, не из книги Щебальского; годы даны по новому стилю, места указаны там, где они надежно известны.</p>
+  <div class="treeview" id="treeview"><svg id="tree" role="img" aria-label="Родословное древо Голштейн-Готторпов, 1575–1830"><g id="tz"></g></svg></div>
+  <div class="tleg">
+    <span><i style="border-color:var(--h-g);background:color-mix(in srgb,var(--h-g) 14%,var(--panel))"></i>Готторп, старшая линия</span>
+    <span><i style="border-color:var(--h-y);background:color-mix(in srgb,var(--h-y) 14%,var(--panel))"></i>младшая линия (Эйтин, Ольденбург)</span>
+    <span><i style="border-color:var(--h-s);background:color-mix(in srgb,var(--h-s) 14%,var(--panel))"></i>Готторпы на троне Швеции</span>
+    <span><i style="border-color:var(--h-r);background:color-mix(in srgb,var(--h-r) 14%,var(--panel))"></i>Гольштейн-Готторп-Романовы</span>
+    <span><i style="border-color:var(--h-p);background:color-mix(in srgb,var(--h-p) 14%,var(--panel))"></i>шведские Пфальцы</span>
+    <span><i style="border-color:var(--h-a);background:color-mix(in srgb,var(--h-a) 14%,var(--panel))"></i>Ангальт-Цербст</span>
+    <span><i style="border-color:var(--rule);border-style:dashed;background:var(--bg)"></i>супруг(а) со стороны</span>
+    <span style="color:var(--h-g)">∞ год брака</span>
+    <span>пунктирная линия: «родом из этой семьи»</span>
+  </div>
+  <p class="foot">Толстая рамка отмечает линию герцогов от Иоганна Адольфа до Павла I. Если оба супруга происходят от Готторпов, второй стоит рядом с мужем или женой, а к семье, из которой он родом, ведет цветная пунктирная линия. Сведения взяты из общих справочных источников, не из книги Щебальского; годы по новому стилю.</p>
 </section>
 </div>
 
@@ -489,7 +495,6 @@ requestAnimationFrame(loop);
 
 <script>
 (function(){
-// h: ветвь; bp/dp: место рождения/смерти; r: [с,по,тип,подпись]; sp: [год, супруг(а)]
 const P=[
  {id:'ja',h:'g',main:1,name:'Иоганн Адольф',b:1575,d:1616,bp:'Готторп',dp:'Готторп',r:[[1590,1616,'герцог']],sp:[[1596,'Августа Датская (1580–1639), дочь Фредерика II Датского']],
   note:'Герцог с 1590 года. При нем готторпская линия окончательно обособилась от датского королевского дома, хотя Шлезвиг и Гольштейн по-прежнему делились с королем чересполосно.'},
@@ -572,68 +577,101 @@ const P=[
  {id:'jo',p:'ja',h:'g',name:'Иоганн',b:1606,d:1655,dp:'Эйтин',r:[[1634,1655,'князь-епископ']],note:'Младший сын Иоганна Адольфа, первый из Готторпов на Любекской епископской кафедре.'},
 ];
 const HN={g:'Голштейн-Готторп, старшая линия',y:'Голштейн-Готторп, младшая линия',s:'Голштейн-Готторп, шведская королевская ветвь',r:'Гольштейн-Готторп-Романовы',p:'Шведский королевский дом (Пфальц-Цвейбрюккен)',a:'Ангальт-Цербст',o:'Баден-Дурлах'};
+
 const byId=Object.fromEntries(P.map(p=>[p.id,p]));
-const kids={};P.forEach(p=>{if(p.p)(kids[p.p]=kids[p.p]||[]).push(p);});
-Object.values(kids).forEach(a=>a.sort((x,y)=>x.b-y.b));
-const rows=[];(function dfs(p){rows.push(p);(kids[p.id]||[]).forEach(dfs);})(byId.ja);
-rows.forEach((p,i)=>p.i=i);
-const EV=[[1713,'Дания занимает Шлезвиг'],[1724,'брачный договор'],[1762,'Петр III'],[1773,'обмен Гольштейна']];
-const svg=d3.select('#tree');
-const RH=50,TOP=66,Y0=1570,Y1=1832;
-let sel='p3';
+const SPOUSE_OF={hs:'f4',cak:'je',cat:'p3',alb:'cau',hec:'k13',geo:'ekt'};
+const spouseIn={};Object.entries(SPOUSE_OF).forEach(([s,x])=>spouseIn[x]=s);
+const CW=184,SW=156,CH=104,MG=56,GAP=30,LEVEL=CH+96;
 const hv=h=>`var(--h-${h})`;
+function wrap(t,n){const w=t.split(' ');const L=[];let c='';w.forEach(x=>{if((c+' '+x).trim().length>n&&c){L.push(c);c=x;}else c=(c+' '+x).trim();});if(c)L.push(c);return L;}
+// семейные ячейки
+const units={};
+P.forEach(p=>{if(SPOUSE_OF[p.id])return;
+  const inT=spouseIn[p.id];let inY=null;
+  if(inT)inY=(p.m&&p.m.to===inT)?p.m.y:(byId[inT].m?byId[inT].m.y:null);
+  const cards=[{t:'p',id:p.id,w:CW}];
+  if(inT)cards.push({t:'p',id:inT,w:CW,yr:inY});
+  (p.sp||[]).forEach(([yr,txt])=>{if(inT&&yr===inY)return;if(/не был женат/.test(txt))return;cards.push({t:'s',txt,yr,w:SW,of:p.id});});
+  const w=cards.reduce((s,c)=>s+c.w,0)+MG*(cards.length-1);
+  units[p.id]={id:p.id,p,cards,w,children:[]};});
+P.forEach(p=>{if(SPOUSE_OF[p.id]||!p.p)return;const par=units[p.p];if(par)par.children.push(units[p.id]);});
+Object.values(units).forEach(u=>u.children.sort((a,b)=>a.p.b-b.p.b));
+const xlinks=[];Object.keys(SPOUSE_OF).forEach(s=>{const q=byId[s];if(q.p&&units[q.p])xlinks.push({from:q.p,to:s});});
+const root=d3.hierarchy(units.ja,u=>u.children);
+d3.tree().nodeSize([1,LEVEL]).separation((a,b)=>(a.data.w+b.data.w)/2+GAP*(a.parent===b.parent?1:2.5))(root);
+const pos={};const unitGeo={};
+root.each(n=>{const u=n.data;let x=n.x-u.w/2;const y=n.y;u.cards.forEach(c=>{c.x=x;c.y=y;if(c.t==='p')pos[c.id]=c;x+=c.w+MG;});
+  const c0=u.cards[0];const sp=u.cards[1];
+  unitGeo[u.id]=sp?{jx:c0.x+c0.w+MG/2,jy:y+CH/2}:{jx:c0.x+c0.w/2,jy:y+CH};});
+const svg=d3.select('#tree'),gz=d3.select('#tz');
+let sel='p3';
+function draw(){gz.selectAll('*').remove();
+  // поколения
+  const minX=d3.min(Object.values(pos),c=>c.x)-60,maxX=d3.max(root.descendants(),n=>n.x+n.data.w/2)+60;
+  const depth=root.height;const GEN=['ок. 1575','ок. 1600','ок. 1640','ок. 1670','ок. 1700','ок. 1730','ок. 1755','ок. 1780','ок. 1800–1820'];
+  for(let k=0;k<=depth;k++){const y=k*LEVEL-34;gz.append('line').attr('class','genline').attr('x1',minX).attr('x2',maxX).attr('y1',y).attr('y2',y);
+    gz.append('text').attr('class','gen').attr('x',minX).attr('y',y+20).text(`${k+1}-е поколение · ${GEN[k]||''}`);}
+  const lg=gz.append('g');
+  // дети
+  root.each(n=>{const u=n.data;if(!u.children.length)return;const j=unitGeo[u.id];const busY=n.y+CH+(LEVEL-CH)/2;
+    u.children.forEach(ch=>{const c=ch.cards[0];const cx=c.x+c.w/2;lg.append('path').attr('class','kid').attr('d',`M${j.jx},${j.jy} V${busY} H${cx} V${c.y}`);});});
+  // перекрестные связи (супруг из той же семьи)
+  xlinks.forEach(l=>{const j=unitGeo[l.from];const c=pos[l.to];const tx=c.x+c.w/2,ty=c.y;const sy=units[l.from]&&pos[l.from]?pos[l.from].y+CH:j.jy;const col=hv(byId[l.to].h);
+    const startY=units[l.from].cards[1]?j.jy:sy;
+    lg.append('path').attr('class','xlink').style('stroke',col).attr('d',`M${j.jx},${startY} C${j.jx},${startY+160} ${tx},${ty-160} ${tx},${ty}`);});
+  // браки
+  root.each(n=>{const u=n.data;for(let i=1;i<u.cards.length;i++){const a=u.cards[i-1],b=u.cards[i];const y=a.y+CH/2;
+    lg.append('line').attr('class','mline').attr('x1',a.x+a.w).attr('x2',b.x).attr('y1',y).attr('y2',y);
+    const yr=b.yr;lg.append('text').attr('class','mlab').attr('text-anchor','middle').attr('x',(a.x+a.w+b.x)/2).attr('y',y-7).text(yr?'∞ '+yr:'∞');}});
+  // карточки
+  const cg=gz.append('g');
+  root.each(n=>{n.data.cards.forEach(c=>{
+    if(c.t==='p'){const p=byId[c.id];const g=cg.append('g').attr('class','card'+(p.main?' main':'')+(p.id===sel?' sel':'')).attr('data-id',p.id).attr('transform',`translate(${c.x},${c.y})`).attr('tabindex',0).attr('role','button').attr('aria-label',`${p.name}, ${p.b}–${p.d}`);
+      g.append('rect').attr('class','bx').attr('width',c.w).attr('height',CH).attr('rx',8).style('fill',`color-mix(in srgb,${hv(p.h)} 13%,var(--panel))`).style('stroke',hv(p.h)).style('stroke-dasharray',p.grp?'5 4':null);
+      g.append('rect').attr('width',c.w).attr('height',6).attr('rx',3).style('fill',hv(p.h));
+      const nl=wrap(p.name,21).slice(0,2);nl.forEach((l,i)=>g.append('text').attr('class','nm').attr('x',10).attr('y',24+i*17).text(l));
+      let yy=24+nl.length*17+2;
+      g.append('text').attr('class','yr').attr('x',10).attr('y',yy).text(`${p.b}–${p.d}`);yy+=16;
+      if(p.bp)g.append('text').attr('class','pl').attr('x',10).attr('y',yy).text(('род. '+p.bp).slice(0,28));yy+=16;
+      const r=(p.r||[]).filter(x=>x[2]).slice(-1)[0];
+      if(r&&yy<CH-2)g.append('text').attr('class','ro').attr('x',10).attr('y',Math.min(yy,CH-8)).style('fill',hv(p.h)).text(`${r[2]} ${Math.floor(r[0])}–${String(Math.floor(r[1])).slice(-2)}`);
+      g.on('click',()=>show(p.id)).on('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();show(p.id);}});
+    }else{const g=cg.append('g').attr('class','card chip').attr('transform',`translate(${c.x},${c.y})`);
+      g.append('rect').attr('class','bx').attr('width',c.w).attr('height',CH).attr('rx',8);
+      g.append('text').attr('class','lb').attr('x',9).attr('y',17).text(c.yr?'супруг(а)':'жених / невеста');
+      const m=c.txt.match(/\((\d{4}[–-]\d{4})\)/);const nm=c.txt.replace(/\s*\(\d{4}[–-]\d{4}\)/,'');
+      const nl=wrap(nm,20).slice(0,4);nl.forEach((l,i)=>g.append('text').attr('class','nm').attr('x',9).attr('y',35+i*15).text(l));
+      if(m)g.append('text').attr('class','yr').attr('x',9).attr('y',Math.min(35+nl.length*15+2,CH-8)).text(m[1]);
+      g.on('click',()=>show(c.of));}
+  });});
+}
 function show(id){sel=id;const p=byId[id];
   document.getElementById('tdet').style.borderLeftColor=hv(p.h);
   const hs=document.getElementById('tdh');hs.textContent=HN[p.h];hs.style.color=hv(p.h);
   document.getElementById('tdn').textContent=p.name;
-  document.getElementById('tdl').innerHTML='';const L=document.getElementById('tdl');
-  const add=(sym,y,pl)=>{const s=document.createElement('span');s.innerHTML=`${sym} <b></b>`;s.querySelector('b').textContent=y;if(pl)s.append(', '+pl);L.append(s);};
-  add('род.',p.b,p.bp);L.append(document.createTextNode('   ·   '));add('ум.',p.d,p.dp);
+  const L=document.getElementById('tdl');L.innerHTML='';
+  const add=(sym,y,pl)=>{const s=document.createElement('span');s.textContent=sym+' ';const b=document.createElement('b');b.textContent=y;s.append(b);if(pl)s.append(', '+pl);L.append(s);};
+  add('род.',p.b,p.bp);L.append(document.createTextNode('  ·  '));add('ум.',p.d,p.dp);
   document.getElementById('tdr').textContent=(p.r||[]).filter(r=>r[2]).map(([a,b,t])=>`${t}: ${Math.floor(a)}–${Math.floor(b)}`).join('; ');
   const ul=document.getElementById('tds');ul.innerHTML='';(p.sp||[]).forEach(([y,t])=>{const li=document.createElement('li');li.textContent=(y?`∞ ${y}: `:'')+t;ul.append(li);});
   document.getElementById('tdx').textContent=p.note||'';
-  svg.selectAll('.trow').classed('sel',d=>d.id===id);}
-function draw(){
-  const box=document.querySelector('.treebox');const W=Math.max(1080,box.clientWidth);const H=TOP+rows.length*RH+20;
-  svg.attr('width',W).attr('height',H).attr('viewBox',`0 0 ${W} ${H}`);svg.selectAll('*').remove();
-  const x=d3.scaleLinear([Y0,Y1],[14,W-14]);const y=i=>TOP+i*RH+24;
-  const g=svg.append('g').attr('class','grid');
-  [[1600,'XVII век'],[1700,'XVIII век'],[1800,'XIX век']].forEach(([yr,t],k)=>{g.append('rect').attr('x',x(yr)).attr('y',0).attr('width',x(Math.min(yr+100,Y1))-x(yr)).attr('height',H).style('fill',k===1?'color-mix(in srgb,var(--ink) 3.5%,transparent)':'transparent');
-    g.append('text').attr('class','cent').attr('x',x(yr)+6).attr('y',19).text(t);});
-  d3.range(1575,1831,25).forEach(yr=>{g.append('line').attr('x1',x(yr)).attr('x2',x(yr)).attr('y1',27).attr('y2',H);g.append('text').attr('x',x(yr)+3).attr('y',37).text(yr);});
-  const ev=svg.append('g').attr('class','ev');
-  EV.forEach(([yr,t],k)=>{ev.append('line').attr('x1',x(yr)).attr('x2',x(yr)).attr('y1',42).attr('y2',H);ev.append('text').attr('x',x(yr)+3).attr('y',k%2?62:52).text(t);});
-  const cg=svg.append('g');
-  const rg=svg.append('g');
-  const row=rg.selectAll('g').data(rows).join('g').attr('class',d=>'trow'+(d.main?' main':'')).attr('tabindex',0).attr('role','button').attr('aria-label',d=>`${d.name}, ${d.b}–${d.d}`)
-    .on('click',(e,d)=>show(d.id)).on('keydown',(e,d)=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();show(d.id);}});
-  row.append('rect').attr('class','hit').attr('x',0).attr('y',d=>y(d.i)-26).attr('width',W).attr('height',RH);
-  row.each(function(d){const r=d3.select(this);const yy=y(d.i);const col=hv(d.h);const xe=x(Math.min(d.d,Y1));
-    r.append('rect').attr('x',x(d.b)).attr('y',yy-2.5).attr('width',Math.max(3,xe-x(d.b))).attr('height',5).attr('rx',2.5).style('fill',col).style('opacity',d.grp?.35:.45);
-    if(d.d>Y1)r.append('path').attr('d',`M${xe-1},${yy-5} l6,5 l-6,5z`).style('fill',col);
-    (d.r||[]).forEach(([a,b,t])=>{const w=Math.max(4,x(Math.min(b,Y1))-x(a));r.append('rect').attr('x',x(a)).attr('y',yy-7).attr('width',w).attr('height',14).attr('rx',3).style('fill',col);
-      if(t&&w>t.length*5.6+6)r.append('text').attr('class','rtag').attr('x',x(a)+4).attr('y',yy+3.5).text(t);});
-    const text=d.name+'  '+d.b+'–'+d.d+(d.bp?'   род. '+d.bp:'');const nameW=text.length*6.4;
-    const right=x(d.b)+nameW>W-10;const tx=right?W-12:x(d.b);const an=right?'end':'start';
-    const t=r.append('text').attr('y',yy-11).attr('x',tx).attr('text-anchor',an);
-    t.append('tspan').attr('class','tname').text(d.name+'  ');t.append('tspan').attr('class','tdates').text(`${d.b}–${d.d}`);
-    if(d.bp)t.append('tspan').attr('class','tplace').text(`   род. ${d.bp}`);
-    if(d.sp&&d.sp.length){const s=r.append('text').attr('class','tsp').attr('y',yy+19).attr('x',tx).attr('text-anchor',an);
-      d.sp.forEach(([yr,who],k)=>{if(k)s.append('tspan').text('   ');if(yr)s.append('tspan').attr('class','y').text('∞ '+yr+' ');else s.append('tspan').attr('class','y').text('∞ ');s.append('tspan').text(who.split(',')[0].split(' (')[0].replace(/^(.{0,48}).*$/,'$1'));});}
-    r.append('title').text(`${d.name}, ${d.b}–${d.d}`);});
-  rows.forEach(d=>{[['p',''],['p2',' p2']].forEach(([k,c])=>{if(!d[k])return;const pa=byId[d[k]];const xx=x(d.b);
-    cg.append('path').attr('class','conn'+c).attr('d',`M${xx},${y(pa.i)+3} L${xx},${y(d.i)-3}`);
-    cg.append('circle').attr('class','cdot').attr('cx',xx).attr('cy',y(pa.i)).attr('r',2.2);});});
-  rows.forEach(d=>{if(!d.m)return;const o=byId[d.m.to];const xx=x(d.m.y);
-    cg.append('path').attr('class','marr').attr('d',`M${xx},${y(d.i)} L${xx},${y(o.i)}`);
-    rg.append('text').attr('class','marrl').attr('x',xx+4).attr('y',(y(d.i)+y(o.i))/2).text('∞ '+d.m.y);});
-  show(sel);
-}
-new ResizeObserver(()=>{if(!document.getElementById('pane-tree').hidden)draw();}).observe(document.querySelector('.treebox'));
+  gz.selectAll('.card').classed('sel',function(){return this.getAttribute('data-id')===id;});}
+// масштаб и перемещение
+const zoom=d3.zoom().scaleExtent([0.08,2.4]).on('zoom',e=>gz.attr('transform',e.transform));
+svg.call(zoom).on('dblclick.zoom',null);
+function vw(){const r=document.getElementById('treeview').getBoundingClientRect();return [r.width,r.height];}
+function focus(id,k){const c=pos[id];const [W,H]=vw();svg.transition().duration(700).call(zoom.transform,d3.zoomIdentity.translate(W/2-(c.x+c.w/2)*k,H/2-(c.y+CH/2)*k).scale(k));}
+function fitAll(){const b=gz.node().getBBox();const [W,H]=vw();const k=Math.min(W/(b.width+40),H/(b.height+40));svg.transition().duration(700).call(zoom.transform,d3.zoomIdentity.translate(W/2-(b.x+b.width/2)*k,H/2-(b.y+b.height/2)*k).scale(k));}
+document.getElementById('tz-in').onclick=()=>svg.transition().duration(300).call(zoom.scaleBy,1.4);
+document.getElementById('tz-out').onclick=()=>svg.transition().duration(300).call(zoom.scaleBy,1/1.4);
+document.getElementById('tz-all').onclick=fitAll;
+document.getElementById('tz-p3').onclick=()=>{show('p3');focus('p3',.85);};
+let ready=false;
+function open(){if(!ready){draw();ready=true;show(sel);setTimeout(()=>{const [W]=vw();focus('p3',W<600?.55:.8);},120);}}
 function setTab(t){const tree=t==='tree';
   document.getElementById('pane-map').hidden=tree;document.getElementById('pane-tree').hidden=!tree;
   document.getElementById('tab-map').setAttribute('aria-selected',!tree);document.getElementById('tab-tree').setAttribute('aria-selected',tree);
-  if(tree){if(typeof setPlay==='function')setPlay(false);requestAnimationFrame(draw);}
+  if(tree){if(typeof setPlay==='function')setPlay(false);requestAnimationFrame(open);}
 }
 document.getElementById('tab-map').onclick=()=>{location.hash='map';};
 document.getElementById('tab-tree').onclick=()=>{location.hash='tree';};
